@@ -1,0 +1,25 @@
+{
+  "name": "ng-utils",
+  "homepage": "https://github.com/paliari/ng-utils",
+  "description": "Utilidades para Angularjs",
+  "main": "dist/ng-utils.js",
+  "moduleType": [],
+  "keywords": [
+    "ng-utils",
+    "angular-utils",
+    "utils",
+    "angular",
+    "angularjs"
+  ],
+  "authors": [
+    "Marcos A Paliari"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
