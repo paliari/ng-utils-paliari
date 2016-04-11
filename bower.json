@@ -1,11 +1,13 @@
 {
-  "name": "ng-utils",
-  "homepage": "https://github.com/paliari/ng-utils",
+  "name": "ng-utils-paliari",
+  "homepage": "https://github.com/paliari/ng-utils-paliari",
   "description": "Utilidades para Angularjs",
   "main": "dist/ng-utils.js",
   "moduleType": [],
   "keywords": [
     "ng-utils",
+    "ng-utils-paliari",
+    "paliari",
     "angular-utils",
     "utils",
     "angular",
