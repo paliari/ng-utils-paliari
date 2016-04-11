@@ -1,5 +1,16 @@
 (function() {
-  var I18n, KvStorage, Mask, Split, TranslationLoader, UUID;
+  var I18n, KvStorage, Mask, NgUtilsPaliari, Split, TranslationLoader, UUID;
+
+  NgUtilsPaliari = (function() {
+    function NgUtilsPaliari() {
+      return [];
+    }
+
+    return NgUtilsPaliari;
+
+  })();
+
+  angular.module('ng-utils-paliari', new NgUtilsPaliari());
 
   Mask = (function() {
     function Mask() {
