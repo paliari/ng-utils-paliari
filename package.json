@@ -1,0 +1,24 @@
+{
+  "name": "ng-utils-paliari",
+  "version": "1.0.0",
+  "description": "Utilidades para Angularjs",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paliari/ng-utils-paliari.git"
+  },
+  "keywords": [
+    "ng-utils-paliari",
+    "paliari",
+    "ng-utils"
+  ],
+  "author": "Marcos A Paliari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paliari/ng-utils-paliari/issues"
+  },
+  "homepage": "https://github.com/paliari/ng-utils-paliari#readme"
+}
