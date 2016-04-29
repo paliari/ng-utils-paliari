@@ -1,5 +1,6 @@
 {
   "name": "ng-utils-paliari",
+  "version": "1.0.0",
   "homepage": "https://github.com/paliari/ng-utils-paliari",
   "description": "Utilidades para Angularjs",
   "main": "dist/ng-utils-paliari.js",
