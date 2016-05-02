@@ -1,5 +1,5 @@
 class Mask extends Factory
-  constructor: ->
+  constructor: (NgStringMask, FORMATS) ->
     mask =
       cpfCnpj: (val) ->
         return '' unless val
@@ -11,26 +11,23 @@ class Mask extends Factory
         val
 
       cpf: (val) ->
-        val = @clearNumeric(val)
-        val.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+        NgStringMask(FORMATS.cpf).apply val
 
       cnpj: (val) ->
-        val = @clearNumeric(val)
-        val.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5')
+        NgStringMask(FORMATS.cnpj).apply val
 
       codval: (val) ->
         val = @clearAlphaNumeric(val)
         val.replace(/^(\w{3})(\w{3})(\w{3})/, '$1-$2-$3')
 
       cep: (val) ->
-        val = @clearNumeric(val)
-        val.replace(/^(\d{2})(\d{3})(\d{3})/, '$1.$2-$3')
+        NgStringMask(FORMATS.cep).apply val
 
       fone: (val) ->
         val = @clearNumeric(val)
         if val.substr(0, 4) is '0800'
           return val.replace(/^(\d{4})(\d{2,4})(\d{4})/, '$1 $2-$3')
-        val.replace(/^([0]{0,1})(\d{2}){0,1}(\d{4,5})(\d{4})/, '($1$2) $3-$4')
+        NgStringMask(FORMATS.fone).apply val
 
       clearAlphaNumeric: (val) ->
         return '' unless val
