@@ -1,5 +1,5 @@
 (function() {
-  var I18n, KvStorage, Mask, NgUtilsPaliari, Split, TranslationLoader, UUID;
+  var CacheMemory, I18n, KvStorage, Mask, NgUtilsPaliari, TranslationLoader, UUID;
 
   NgUtilsPaliari = (function() {
     function NgUtilsPaliari() {
@@ -133,27 +133,51 @@
 
   angular.module('ng-utils-paliari').factory('UUID', [UUID]);
 
-  Split = (function() {
-    function Split() {
-      return function(input, splitChar, splitIndex) {
-        var splited;
-        splited = ("" + input).split(splitChar);
-        switch (splitIndex) {
-          case 'first':
-            return _.first(splited);
-          case 'last':
-            return _.last(splited);
-          default:
-            return splited[splitIndex];
-        }
-      };
+  CacheMemory = (function() {
+    function CacheMemory() {
+      this.lifetime = 3600000;
+      this.reset();
     }
 
-    return Split;
+    CacheMemory.prototype.reset = function() {
+      return this.items = {};
+    };
+
+    CacheMemory.prototype.setItem = function(key, value, lifetime) {
+      if (lifetime == null) {
+        lifetime = this.lifetime;
+      }
+      return this.items[key] = {
+        value: value,
+        time: Date.now() + lifetime
+      };
+    };
+
+    CacheMemory.prototype.getItem = function(key) {
+      if (this.checkTime(key)) {
+        return this.items[key]['value'];
+      }
+      return this.clearItem(key);
+    };
+
+    CacheMemory.prototype.clearItem = function(key) {
+      try {
+        delete this.items[key];
+      } catch (undefined) {}
+      return void 0;
+    };
+
+    CacheMemory.prototype.checkTime = function(key) {
+      if (this.items[key]) {
+        return this.items[key]['time'] > Date.now();
+      }
+    };
+
+    return CacheMemory;
 
   })();
 
-  angular.module('ng-utils-paliari').filter('split', [Split]);
+  angular.module('ng-utils-paliari').service('cacheMemoryService', [CacheMemory]);
 
   I18n = (function() {
     function I18n($q, Restangular) {
