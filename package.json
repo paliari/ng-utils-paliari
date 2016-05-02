@@ -1,6 +1,6 @@
 {
   "name": "ng-utils-paliari",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilidades para Angularjs",
   "main": "Gulpfile.js",
   "scripts": {
