@@ -1,9 +1,9 @@
 (function() {
-  var CacheMemory, I18n, KvStorage, Mask, NgUtilsPaliari, TranslationLoader, UUID;
+  var CacheMemory, I18n, KvStorage, Mask, NgMaskEndereco, NgUtilsPaliari, TranslationLoader, UUID;
 
   NgUtilsPaliari = (function() {
     function NgUtilsPaliari() {
-      return [];
+      return ['ng-mask-filters'];
     }
 
     return NgUtilsPaliari;
@@ -13,7 +13,7 @@
   angular.module('ng-utils-paliari', new NgUtilsPaliari());
 
   Mask = (function() {
-    function Mask() {
+    function Mask(NgStringMask, FORMATS) {
       var mask;
       mask = {
         cpfCnpj: function(val) {
@@ -30,27 +30,24 @@
           return val;
         },
         cpf: function(val) {
-          val = this.clearNumeric(val);
-          return val.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          return NgStringMask(FORMATS.cpf).apply(val);
         },
         cnpj: function(val) {
-          val = this.clearNumeric(val);
-          return val.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+          return NgStringMask(FORMATS.cnpj).apply(val);
         },
         codval: function(val) {
           val = this.clearAlphaNumeric(val);
           return val.replace(/^(\w{3})(\w{3})(\w{3})/, '$1-$2-$3');
         },
         cep: function(val) {
-          val = this.clearNumeric(val);
-          return val.replace(/^(\d{2})(\d{3})(\d{3})/, '$1.$2-$3');
+          return NgStringMask(FORMATS.cep).apply(val);
         },
         fone: function(val) {
           val = this.clearNumeric(val);
           if (val.substr(0, 4) === '0800') {
             return val.replace(/^(\d{4})(\d{2,4})(\d{4})/, '$1 $2-$3');
           }
-          return val.replace(/^([0]{0,1})(\d{2}){0,1}(\d{4,5})(\d{4})/, '($1$2) $3-$4');
+          return NgStringMask(FORMATS.fone).apply(val);
         },
         clearAlphaNumeric: function(val) {
           if (!val) {
@@ -98,7 +95,7 @@
 
   })();
 
-  angular.module('ng-utils-paliari').factory('Mask', [Mask]);
+  angular.module('ng-utils-paliari').factory('Mask', ['NgStringMask', 'FORMATS', Mask]);
 
   TranslationLoader = (function() {
     function TranslationLoader(i18nService) {
@@ -132,6 +129,19 @@
   })();
 
   angular.module('ng-utils-paliari').factory('UUID', [UUID]);
+
+  NgMaskEndereco = (function() {
+    function NgMaskEndereco(Mask) {
+      return function(endereco) {
+        return Mask.endereco(endereco);
+      };
+    }
+
+    return NgMaskEndereco;
+
+  })();
+
+  angular.module('ng-utils-paliari').filter('ngMaskEndereco', ['Mask', NgMaskEndereco]);
 
   CacheMemory = (function() {
     function CacheMemory() {
