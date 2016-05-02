@@ -6,6 +6,9 @@
   "scripts": {
     "lint": "git diff --name-only --diff-filter=ACM --staged | grep .coffee | xargs ./node_modules/coffeelint/bin/coffeelint"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paliari/ng-utils-paliari.git"
