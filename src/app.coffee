@@ -1,3 +1,3 @@
 class NgUtilsPaliari extends App
   constructor: ->
-    return []
+    return ['ng-mask-filters']
