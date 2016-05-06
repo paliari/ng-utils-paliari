@@ -1,5 +1,5 @@
 (function() {
-  var CacheMemory, I18n, KvStorage, Mask, NgMaskEndereco, NgUtilsPaliari, TranslationLoader, UUID;
+  var CacheMemory, I18n, KvStorage, Mask, Native, NgMaskEndereco, NgUtilsPaliari, TranslationLoader, UUID;
 
   NgUtilsPaliari = (function() {
     function NgUtilsPaliari() {
@@ -11,6 +11,17 @@
   })();
 
   angular.module('ng-utils-paliari', new NgUtilsPaliari());
+
+  Native = (function() {
+    function Native() {
+      return window.cordova || window.NATIVE;
+    }
+
+    return Native;
+
+  })();
+
+  angular.module('ng-utils-paliari').constant('NATIVE', Native());
 
   Mask = (function() {
     function Mask(NgStringMask, FORMATS) {
